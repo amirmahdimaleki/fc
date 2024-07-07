@@ -1,0 +1,169 @@
+"use client"
+import Image from "next/image";
+import { Box, Button, Container, Grid, Stack, TextField, Typography } from "@mui/material";
+import { FC, useState } from "react";
+import map from '@/public/map.png'
+
+
+interface FormState {
+    name: string;
+    email: string;
+    phone: string;
+    message: string;
+  }
+
+  const initialFormState: FormState = {
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  }
+
+  const ContactUs: React.FC = () => {
+    const [formData, setFormData] = useState<FormState>(initialFormState);
+  
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target;
+      setFormData({ ...formData, [name]: value });
+    };
+  
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      //TODO Handle form submission logic here e.g., send data to server
+          // console.log(formData);
+      // Reset form after submission
+      setFormData(initialFormState);
+    };
+  
+    return (
+        <Container
+        component="main"
+        sx={{
+          display: "flex",
+          flexDirection: { md: "row", sm: "column", xs: "column" },
+          justifyContent: "center",
+
+        }}
+        >
+          <Box 
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            flexWrap: "wrap"
+          }}>
+            <Box
+             
+            >
+           <Box sx= {{display:"flex", flexDirection:"row"}}>
+           <Typography color="text.secondary" variant="h3" sx={{ marginBottom: { md: "25px" }, fontWeight: 'bold'  }}>
+                      Get in
+              </Typography>
+              <Typography color="primary" variant="h3" sx={{ marginLeft: { md: "8px" }, marginBottom: { md: "25px" }, fontWeight: 'bold' }}>
+                       Touch
+              </Typography>
+           </Box>
+            </Box>
+              <Typography color="text.secondary" variant="h6" sx={{ marginBottom: { md: "25px" }, wordWrap: "break-word" }}>
+                      Enim tempor eget pharetra facilisis sed maecenas adipiscing. Eu leo molestive vel, non id blandit netus.
+              </Typography>
+              <Box 
+              sx={{display:"flex", width: "500px", height: "100px", marginLeft: "10px"}}>
+              <form onSubmit={handleSubmit}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              id="name"
+              name="name"
+              label="Name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+            variant="outlined"
+              fullWidth
+              id="email"
+              name="email"
+              label="Email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              required
+              id="phone"
+              name="phone"
+              label="Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              multiline
+              rows={1}
+              id="message"
+              name="message"
+              label="how did you find us?"
+              value={formData.message}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary" >
+              SEND
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+      </Box>
+     <Box
+     sx={{
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap"
+    }}
+     >
+     <Box>
+            <Typography>
+              PHONE
+            </Typography>
+      </Box>
+      <Box>
+            <Typography>
+              PHONE
+            </Typography>
+      </Box>
+      <Box>
+            <Typography>
+              PHONE
+            </Typography>
+      </Box>
+      <Box>
+            <Typography>
+              PHONE
+            </Typography>
+      </Box>
+      <Box>
+            <Typography>
+              PHONE
+            </Typography>
+      </Box>
+     </Box>
+          </Box>
+          <Box>
+              <Image src={map}  width={490} height={630} alt="map"/>
+          </Box>
+        </Container>
+      
+    );
+  };
+  
+  export default ContactUs;
